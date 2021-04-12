@@ -17,7 +17,7 @@ class RegisterController extends Controller
             $registers = Register::latest()->get();
         }
         
-        return view("showRegister", ["register" => $register]);
+        return view("showRegister", ["register" => $registers]);
     }
 
     public function create()
@@ -30,8 +30,8 @@ class RegisterController extends Controller
     public function store()
     {
        $registers = Register::create($this->validateRegister());
-       $registers->stacks()->attach(request("stacks"));
        dd($registers);
+       $registers->stacks()->attach(request("stacks"));
        return redirect(route("registers.index"));
     }
 
