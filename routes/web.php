@@ -16,3 +16,16 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+//Route::get("/registers", "App\Http\Controllers\RegisterController@index")->name("registers.index");
+Route::get('/registers', [RegisterController::class, 'index'])->name("registers.index");
+
+Route::post("/registers/create", "App\Http\Controllers\RegisterController@store");
+
+Route::get("/registers/create", "App\Http\Controllers\RegisterController@create");
+
+Route::get("/registers/{register}", "App\Http\Controllers\RegisterController@show")->name("registers.show");
+
+Route::get("/registers/{register}/edit", "App\Http\Controllers\RegisterController@edit");
+
+Route::put("/registers/{register}", "App\Http\Controllers\RegisterController@update");
