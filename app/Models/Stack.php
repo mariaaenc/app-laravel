@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Stack extends Model
 {
     use HasFactory;
+
+    protected $fillable = ["name"];
     public function registers(){
-        return $this->belongsToMany(Register::class);
-      }
+      return $this->belongsToMany(Register::class);
+    }
 }

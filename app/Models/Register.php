@@ -10,6 +10,6 @@ class Register extends Model
     protected $guarded = [];
     use HasFactory;
     public function stacks(){
-        return $this->belongsToMany(Stack::class)->withTimestamps();
+        return $this->belongsToMany(Stack::class, "register_stack", "register_id", "stack_id")->withTimestamps();
     }
 }

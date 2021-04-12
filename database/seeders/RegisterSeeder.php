@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use App\Models\Register;
+use App\Models\Stack;
 
 class RegisterSeeder extends Seeder
 {
@@ -13,6 +15,8 @@ class RegisterSeeder extends Seeder
      */
     public function run()
     {
-        //
+        $register = Register::factory()
+            ->has(Stack::factory()->count(3))
+            ->create();
     }
 }

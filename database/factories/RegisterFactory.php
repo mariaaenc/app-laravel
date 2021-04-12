@@ -22,7 +22,11 @@ class RegisterFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' => $this->faker->name(),
+            'email' => $this->faker->unique()->safeEmail(),
+            'cpf' => $this->faker->cpf(),
+            'address' => $this->faker->address(),
+            'date_birth' => $this->faker->date(),
         ];
     }
 }
