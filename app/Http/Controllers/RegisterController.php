@@ -21,7 +21,7 @@ class RegisterController extends Controller
             ->when($request->input("stack"), fn($query, $stack) => $query->whereHas(
                 "stacks",
                 fn($query) => $query->where("stacks.id", $stack)
-            ))->latest()->get();
+            ))->latest()->simplePaginate(5);
         
         return view("showRegister", ["registers" => $registers, "stacks" => Stack::all()]);
     }

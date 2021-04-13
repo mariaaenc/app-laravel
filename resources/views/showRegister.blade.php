@@ -48,5 +48,7 @@
   @endforeach()
   </tbody>
 </table>
-{{-- {{ $registers->links() }} --}}
+<div>
+  {{ $registers->links() }}
+</div>
 @endsection

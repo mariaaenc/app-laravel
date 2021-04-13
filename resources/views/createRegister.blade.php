@@ -44,7 +44,7 @@
         </div>
 
         <div>
-            <label class="label">Stacks</label>
+            <label class="label mt-2">Stacks</label>
 
             <div class="select is-multiple control">
                 <select name="stacks[]" multiple>

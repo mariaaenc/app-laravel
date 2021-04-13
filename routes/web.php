@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 }); */
 
 Route::get("/", "App\Http\Controllers\RegisterController@index")->name("registers.index");
+
 //Route::get('/registers', [RegisterController::class, 'index'])->name("registers.index");
 
 Route::get("/registers/create", "App\Http\Controllers\RegisterController@create");
@@ -31,3 +32,19 @@ Route::get("/registers/{register}/edit", "App\Http\Controllers\RegisterControlle
 Route::put("/registers/{register}", "App\Http\Controllers\RegisterController@update")->name("registers.update");
 
 Route::delete("/registers/{register}", "App\Http\Controllers\RegisterController@destroy");
+
+Route::get("/stacks", "App\Http\Controllers\StackController@index")->name("stacks.index");
+
+Route::post("/stacks", "App\Http\Controllers\StackController@store")->name("stacks.store");
+
+Route::get("/stacks/create", "App\Http\Controllers\StackController@create");
+
+Route::get("/stacks/{stack}/edit", "App\Http\Controllers\StackController@edit")->name("stacks.edit");
+
+Route::get("/stacks/{stack}", "App\Http\Controllers\StackController@show")->name("stacks.show");
+
+Route::put("/stacks/{stack}", "App\Http\Controllers\StackController@update")->name("stacks.update");
+
+Route::delete("/stacks/{stack}", "App\Http\Controllers\StackController@destroy")->name("stacks.destroy");
+
+
