@@ -3,17 +3,20 @@
 @section('titulo', 'Lista de Técnicos')
 
 @section('conteudo')
-  <div class="d-flex mb-3">
+  <form  method="GET" action="/" class="d-flex mb-3">
     <input
       class="form-control me-3"
       placeholder="Nome do técnico"
+      name="name"
     />
-    <select class="form-select form-control me-5">
-      <option selected>Selecione uma stack</option>
-      <option></option>
+    <select class="form-select form-control me-5" name="stack">
+      <option selected></option>
+      @foreach ($stacks as $stack)
+          <option value="{{ $stack->id }}"> {{ $stack->name }} </option>
+      @endforeach
     </select>
-    <button type="button" class="btn btn-primary bi bi-search border-0"></button>
-  </div>
+    <button type="submit" class="btn btn-primary bi bi-search border-0"></button>
+  </form>
   <table class="table table-secondary border-table">
   <thead>
     <tr>

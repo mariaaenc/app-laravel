@@ -2,22 +2,28 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use App\Models\Register;
 use App\Models\Stack;
 
+
 class RegisterController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        if(request("stacks")){
-            $registers = Stack::where("name", request("stacks"))->firstOrFail()->registers;
-        }
-        else{
-            $registers = Register::latest()->get();
-        }
+        $request->validate([
+            "name"=>"nullable",
+            "stack"=>["nullable", "integer", "exists:stacks,id"]
+        ]);
+
+        $registers = Register::when($request->input("name"), fn($query, $name) => $query->where("name", $name))
+            ->when($request->input("stack"), fn($query, $stack) => $query->whereHas(
+                "stacks",
+                fn($query) => $query->where("stacks.id", $stack)
+            ))->latest()->get();
         
-        return view("showRegister", ["register" => $registers]);
+        return view("showRegister", ["register" => $registers, "stacks" => Stack::all()]);
     }
 
     public function create()
@@ -27,17 +33,17 @@ class RegisterController extends Controller
         ]);
     }
 
-    public function store()
+    public function store(Request $request)
     {
-       $registers = Register::create($this->validateRegister());
-       dd($registers);
+       $registers = Register::create(Arr::except($this->validateRegister($request), "stacks"));
        $registers->stacks()->attach(request("stacks"));
        return redirect(route("registers.index"));
     }
 
     public function show(Register $registers)
     {
-        return view("showRegister", ["register" => $registers]);
+        dd(["register" => $registers, "stack" => Stack::all()]);
+        //return view("showRegister", ["register" => $registers, "stack" => Stack::all()]);
     }
 
 
@@ -59,13 +65,13 @@ class RegisterController extends Controller
         //
     }
 
-    public function validateRegister(){
+    public function validateRegister(Request $request){
         return request()->validate([
             "name" => "required",
             "email" => "required",
             "cpf" => "required",
             "address" => "required",
-            "date-birth" => "required",
+            "date_birth" => "required",
             "stacks" => "exists:stacks,id"
         ]);
     }
