@@ -30,22 +30,23 @@
     </tr>
   </thead>
   <tbody>
-  @foreach ($register as $cadastros)
+  @foreach ($registers as $register)
     <tr>
-      <th scope="row">{{ $cadastros->id }}</th>
-      <td>{{ $cadastros->name }}</td>
-      <td>{{ $cadastros->cpf }}</td>
-      <td>{{ $cadastros->email }}</td>
-      <td>{{ $cadastros->address }}</td>
-      <td>{{ $cadastros->created_at }}</td>
+      <th scope="row">{{ $register->id }}</th>
+      <td>{{ $register->name }}</td>
+      <td>{{ $register->cpf }}</td>
+      <td>{{ $register->email }}</td>
+      <td>{{ $register->address }}</td>
+      <td>{{ ($register->created_at)->format('d/m/y H:i') }}</td>
       <td>
         <div class="d-flex justify-content-between">
-          <button type="button" class="btn btn-outline-danger btn-sm bi bi-trash border-0" onclick=""></button>
-          <button type="button" class="btn btn-outline-primary btn-sm bi bi-pencil border-0"></button>
-        </div>
+          <a href="/" type="button" class="btn btn-outline-danger btn-sm bi bi-trash border-0"></a>
+          <a href="{{route("registers.show", ['register' => $register->id])}}" type="button" class="btn btn-outline-primary btn-sm bi bi-pencil border-0"></button>
+          </a>
       </td>
     </tr>
   @endforeach()
   </tbody>
 </table>
+{{-- {{ $registers->links() }} --}}
 @endsection

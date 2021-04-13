@@ -19,6 +19,11 @@
 
         <div>
             <input class="form-control" placeholder="CPF do Técnico" type="text" name="cpf" id="cpf"/>
+            @if($errors->has('cpf'))
+                @foreach($errors->get('cpf') as $erro)
+                <strong class="erro"> {{ $erro }} </strong>
+                @endforeach
+            @endif
         </div>
 
         <div>
@@ -47,9 +52,6 @@
                         <option value="{{ $stack->id }}"> {{ $stack->name }} </option>
                     @endforeach
                 </select>
-                @error('stacks')
-                    <p class="help is-danger">{{ $message }}</p>
-                @enderror
             </div>
             <div class="d-flex justify-content-end">
                 <button class="btn btn-success mt-2" type="submit">Salvar</button>

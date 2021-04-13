@@ -28,6 +28,6 @@ Route::get("/registers/{register}", "App\Http\Controllers\RegisterController@sho
 
 Route::get("/registers/{register}/edit", "App\Http\Controllers\RegisterController@edit");
 
-Route::put("/registers/{register}", "App\Http\Controllers\RegisterController@update");
+Route::put("/registers/{register}", "App\Http\Controllers\RegisterController@update")->name("registers.update");
 
 Route::delete("/registers/{register}", "App\Http\Controllers\RegisterController@destroy");

@@ -4,7 +4,7 @@
 
 @section('conteudo')
 <div class= "p-4 d-flex flex-column rounded form">
-    <form method="POST" action="/registers/{{ $register->id }}">
+    <form method="POST" action="{{route("registers.update", ['register' => $register->id])}}">
         @csrf
         @method("PUT")
         <p>Formulário do Técnico</p>
@@ -32,7 +32,7 @@
         </div>
 
         <div>
-            <input class="form-control" placeholder="Data de Nascimento" type="date" name="date_birth" id="date_birth"/>
+            <input class="form-control" placeholder="Data de Nascimento" type="date" name="date_birth" id="date_birth" value="{{ date('Y-m-d', strtotime($register->date_birth)) }}"/>
         </div>
 
         <div>
@@ -40,9 +40,9 @@
         </div>
 
         <div>
-            <label class="label" for="body">Stacks</label>
+            <label class="label mt-2" for="body">Stacks</label>
 
-            <div class="select is-multiple control">
+            {{-- <div class="select is-multiple control">
                 <select name="stacks[]" multiple>
                     @foreach ($stacks as $stack)
                         <option value="{{ $stack->id }}"> {{ $stack->name }} </option>
@@ -51,7 +51,7 @@
                 @error('stacks')
                     <p class="help is-danger">{{ $message }}</p>
                 @enderror
-            </div>
+            </div> --}}
             <button class="btn btn-success mt-2" type="submit">Salvar</button>
         </div>
 

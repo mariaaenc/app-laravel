@@ -23,7 +23,7 @@ class RegisterController extends Controller
                 fn($query) => $query->where("stacks.id", $stack)
             ))->latest()->get();
         
-        return view("showRegister", ["register" => $registers, "stacks" => Stack::all()]);
+        return view("showRegister", ["registers" => $registers, "stacks" => Stack::all()]);
     }
 
     public function create()
@@ -40,24 +40,23 @@ class RegisterController extends Controller
        return redirect(route("registers.index"));
     }
 
-    public function show(Register $registers)
+    public function show(Register $register)
     {
-        dd(["register" => $registers, "stack" => Stack::all()]);
-        //return view("showRegister", ["register" => $registers, "stack" => Stack::all()]);
+        return view("editRegister", compact('register'));
     }
 
 
-    public function edit(Register $registers)
+    public function edit(Register $register)
     {
-        return view("editRegister", compact("registers"));
+        return redirect()->route('registers.show', ["register" => $register->id]);
     }
 
 
     public function update(Request $request, Register $registers)
     {
-        $registers->update($this->validateRegister());
 
-        return redirect("/registers/" . $register->id);
+       //$registers->stacks()->attach(request("stacks"));
+       /* return redirect("/registers/" . $registers->id); */
     }
 
     public function destroy(Register $registers)
