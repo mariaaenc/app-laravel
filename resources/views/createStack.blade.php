@@ -35,9 +35,15 @@
                 <th scope="row">{{ $stack->id }}</th>
                 <td>{{ $stack->name }}</td>
                 <td>
-                    <a href="{{route("stacks.destroy", ['stack' => $stack->id])}}" type="button" class="btn btn-outline-danger btn-sm bi bi-trash border-0"></a>
-                    <a href="{{route("stacks.show", ['stack' => $stack->id])}}" type="button" class="btn btn-outline-primary btn-sm bi bi-pencil border-0"></button>
-                    </a>
+                    <div class="d-flex justify-content-between">
+                        <form action="{{route("stacks.destroy", ['stack' => $stack->id])}}" method="POST">
+                            @csrf
+                            @method("DELETE")
+                            <button type="submit" class="btn btn-outline-danger btn-sm bi bi-trash border-0"></button>
+                        </form>
+                        <a href="{{route("stacks.show", ['stack' => $stack->id])}}" type="button" class="btn btn-outline-primary btn-sm bi bi-pencil border-0"></button>
+                        </a>
+                    </div>
                 </td>
             </tr>
             @endforeach()

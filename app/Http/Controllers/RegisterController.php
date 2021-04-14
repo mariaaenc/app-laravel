@@ -42,7 +42,9 @@ class RegisterController extends Controller
 
     public function show(Register $register)
     {
-        return view("editRegister", compact('register'));
+        $allStacks = Stack::all();
+        $stacks = $register->stacks;
+        return view("editRegister", compact('register', 'stacks', 'allStacks'));
     }
 
 
@@ -52,16 +54,25 @@ class RegisterController extends Controller
     }
 
 
-    public function update(Request $request, Register $registers)
+    public function update(Request $request, Register $register)
     {
-
-       //$registers->stacks()->attach(request("stacks"));
-       /* return redirect("/registers/" . $registers->id); */
+        $register->update(Arr::except($this->validateRegister($request), "stacks"));
+        $newStacks = $request->input("stacks");
+        if ($newStacks) {
+            $register->stacks()->sync($newStacks);
+            /* $registerStacks = $register->stacks->pluck("id");
+            $toDelete = array_diff($registerStacks, $newStacks);
+            $register->stacks()->detach($toDelete);
+            $toAttach = array_diff($newStacks, $registerStacks);
+            $register->stacks()->attach($toAttach); */
+        }
+        return redirect("/registers/" . $register->id);
     }
 
-    public function destroy(Register $registers)
+    public function destroy(Register $register)
     {
-        //
+        $register->delete();
+        return redirect(route("registers.index"));
     }
 
     public function validateRegister(Request $request){

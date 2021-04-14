@@ -78,10 +78,9 @@ class StackController extends Controller
         /* $stack->name = $request; */
     }
 
-    public function destroy($id)
+    public function destroy(Stack $stack)
     {
-        $stack = Stack::find($id);
-        $stack->delete();
+        $stack->delete($stack);
         return redirect()->route('stacks.index');
     }
 }

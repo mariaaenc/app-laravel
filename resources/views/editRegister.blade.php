@@ -43,16 +43,32 @@
             <label class="label mt-2" for="body">Stacks</label>
 
             {{-- <div class="select is-multiple control">
-                <select name="stacks[]" multiple>
-                    @foreach ($stacks as $stack)
-                        <option value="{{ $stack->id }}"> {{ $stack->name }} </option>
+                <select name="newStacks[]" multiple>
+                    @foreach ($stacks as $st)
+                        <option selected value="{{ $st->id }}"> {{ $st->name }} </option>
                     @endforeach
                 </select>
                 @error('stacks')
                     <p class="help is-danger">{{ $message }}</p>
                 @enderror
             </div> --}}
-            <button class="btn btn-success mt-2" type="submit">Salvar</button>
+
+            <div class="select is-multiple control">
+                <select name="stacks[]" multiple>
+                    @foreach ($allStacks as $stack)
+                        <option value="{{ $stack->id }}" 
+                            @foreach ($stacks as $st)
+                                @if ($stack->id === $st->id)
+                                    selected
+                                @endif
+                            @endforeach
+                        > {{ $stack->name }} </option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="d-flex justify-content-end">
+                <button class="btn btn-success mt-2" type="submit">Salvar</button>
+            </div>
         </div>
 
     </form>

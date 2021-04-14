@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\StackController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,34 +18,34 @@ use Illuminate\Support\Facades\Route;
     return view('welcome');
 }); */
 
-Route::get("/", "App\Http\Controllers\RegisterController@index")->name("registers.index");
+/* Route::get("/", "App\Http\Controllers\RegisterController@index")->name("registers.index"); */
 
-//Route::get('/registers', [RegisterController::class, 'index'])->name("registers.index");
+Route::get('/', [RegisterController::class, 'index'])->name('registers.index');
 
-Route::get("/registers/create", "App\Http\Controllers\RegisterController@create");
+Route::get("/registers/create", [RegisterController::class, 'create']);
 
-Route::post("/registers", "App\Http\Controllers\RegisterController@store")->name("registers.create");
+Route::post("/registers", [RegisterController::class, 'store'])->name("registers.create");
 
-Route::get("/registers/{register}", "App\Http\Controllers\RegisterController@show")->name("registers.show");
+Route::get("/registers/{register}", [RegisterController::class, 'show'])->name("registers.show");
 
-Route::get("/registers/{register}/edit", "App\Http\Controllers\RegisterController@edit");
+Route::get("/registers/{register}/edit", [RegisterController::class, 'edit']);
 
-Route::put("/registers/{register}", "App\Http\Controllers\RegisterController@update")->name("registers.update");
+Route::put("/registers/{register}", [RegisterController::class, 'update'])->name("registers.update");
 
-Route::delete("/registers/{register}", "App\Http\Controllers\RegisterController@destroy");
+Route::delete("/registers/{register}", [RegisterController::class, 'destroy'])->name("registers.destroy");
 
-Route::get("/stacks", "App\Http\Controllers\StackController@index")->name("stacks.index");
+Route::get("/stacks", [StackController::class, 'index'])->name("stacks.index");
 
-Route::post("/stacks", "App\Http\Controllers\StackController@store")->name("stacks.store");
+Route::post("/stacks", [StackController::class, 'store'])->name("stacks.store");
 
-Route::get("/stacks/create", "App\Http\Controllers\StackController@create");
+Route::get("/stacks/create", [StackController::class, 'create']);
 
-Route::get("/stacks/{stack}/edit", "App\Http\Controllers\StackController@edit")->name("stacks.edit");
+Route::get("/stacks/{stack}/edit", [StackController::class, 'edit'])->name("stacks.edit");
 
-Route::get("/stacks/{stack}", "App\Http\Controllers\StackController@show")->name("stacks.show");
+Route::get("/stacks/{stack}", [StackController::class, 'show'])->name("stacks.show");
 
-Route::put("/stacks/{stack}", "App\Http\Controllers\StackController@update")->name("stacks.update");
+Route::put("/stacks/{stack}", [StackController::class, 'update'])->name("stacks.update");
 
-Route::delete("/stacks/{stack}", "App\Http\Controllers\StackController@destroy")->name("stacks.destroy");
+Route::delete("/stacks/{stack}", [StackController::class, 'destroy'])->name("stacks.destroy");
 
 
