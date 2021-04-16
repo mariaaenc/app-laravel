@@ -16,7 +16,7 @@ class RegisterSeeder extends Seeder
     public function run()
     {
         $register = Register::factory()
-            ->has(Stack::factory()->count(3))
+            ->count(10)
             ->create();
     }
 }
